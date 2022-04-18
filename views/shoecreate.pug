@@ -1,0 +1,32 @@
+extends layout
+
+block content 
+  h1= title 
+ 
+  form(id='shoeForm', action="/resource/shoe", method="POST") 
+    div.form-group 
+        label.shoeAttr(for='shoe_name') shoe name 
+        input#shoe_name(type='text', name='shoe_name') 
+    div.form-group 
+        label.shoeAttr(for='shoe_color') shoe_color
+        input#shoe_color(type='text', name='shoe_color') 
+    div.form-group 
+        label.shoeAttr(for='shoe_size') shoe_size
+        input#shoe_size(type='number', name='shoe_size') 
+    input(type="submit") 
+
+  script. 
+    document.forms['shoeForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target))  
+      }).then((resp) => { 
+        return resp.text(); 
+      }).then((body) => { 
+        alert("Save succeded") 
+      }).catch((error) => { 
+        alert("Save failed " + error ) 
+      }); 
+    });

@@ -26,5 +26,8 @@ router.get('/shoe/:id', shoe_controller.shoe_detail);
  
 // GET request for list of all shoe items. 
 router.get('/shoe', shoe_controller.shoe_list); 
- 
+ /* GET detail shoe page */ 
+router.get('/detail', shoe_controller.shoe_view_one_Page); 
+/* GET create shoe page */ 
+router.get('/create', shoe_controller.shoe_create_Page); 
 module.exports = router; 
