@@ -1,0 +1,45 @@
+extends layout 
+ 
+block content 
+  h1= title 
+
+  if (toShow == null) 
+    h2 No instance to Update
+  else
+    - let shoeid = toShow._id
+    - let shoe_name = toShow.shoe_name
+    - let shoe_color = toShow.shoe_color
+    - let shoe_size = toShow.shoe_size
+
+    div.row(class='mb-2')
+     div.mr-1 ID is
+     div #{shoeid}
+    - let actionid = "/resource/shoe/" + shoeid 
+    form(id='shoeForm', action=actionid, method="PUT") 
+      div.form-group 
+          label.shoeAttr(for='shoe_name') shoe_name 
+          input#shoe_name(type='text', name='shoe_name') 
+      div.form-group 
+          label.shoeAttr(for='shoe_color') shoe_color
+          input#cuisine(type='text', name='shoe_color') 
+      div.form-group 
+          label.shoeAttr(for='shoe_size') shoe_size 
+          input#calories(type='shoe_size', name='shoe_size') 
+      input(type="submit") 
+ 
+    script. 
+      document.forms['shoeForm'].addEventListener('submit', (event) => { 
+        event.preventDefault(); 
+        fetch(event.target.action, { 
+          method: 'PUT', 
+          body: new URLSearchParams(new FormData(event.target)) 
+        }).then((resp) => { 
+          return resp.json();  
+        }).then((body) => { 
+          alert("Update succeded") 
+          // TODO handle body 
+        }).catch((error) => { 
+          // TODO handle error 
+          alert("Update failed " + error ) 
+        }); 
+      });

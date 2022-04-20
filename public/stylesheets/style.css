@@ -9,5 +9,7 @@ a {
 .shoeAttr { 
   background-color: aquamarine; 
   width: 120px; 
+  color: blueviolet;
+  font-size: x-small;
 } 
  

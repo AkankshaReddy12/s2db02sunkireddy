@@ -33,7 +33,7 @@ exports.shoe_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters. 
     // Even though bodies can be in many different formats, we will be picky 
     // and require that it be a json object 
-    // {"shoe_type":"goat", "cost":12, "size":"large"} 
+    // {"shoe_name":"puma", "shoe_color":green, "shoe_size":"7"} 
     document.shoe_name = req.body.shoe_name; 
     document.shoe_color = req.body.shoe_color; 
     document.shoe_size = req.body.shoe_size; 
@@ -59,7 +59,7 @@ ${JSON.stringify(req.body)}`)
     try { 
         let toUpdate = await shoe.findById( req.params.id) 
         // Do updates of properties 
-        if(req.body.shoe_type)  
+        if(req.body.shoe_name)  
                toUpdate.shoe_name = req.body.shoe_name; 
         if(req.body.shoe_color) toUpdate.shoe_color = req.body.shoe_color; 
         if(req.body.shoe_size) toUpdate.shoe_size = req.body.shoe_size; 
@@ -116,6 +116,32 @@ exports.shoe_create_Page =  function(req, res) {
     console.log("create view") 
     try{ 
         res.render('shoecreate', { title: 'shoe Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+//Handle building the view for updating a shoe. 
+// query provides the id 
+exports.shoe_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await shoe.findById(req.query.id) 
+        res.render('shoeupdate', { title: 'shoe Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+// Handle a delete one view with id from query 
+exports.shoe_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await shoe.findById(req.query.id) 
+        res.render('shoedelete', { title: 'shoe Delete', toShow: 
+result }); 
     } 
     catch(err){ 
         res.status(500) 
