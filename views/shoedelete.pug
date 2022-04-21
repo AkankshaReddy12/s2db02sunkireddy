@@ -10,7 +10,7 @@ block content
     - let shoe_name = toShow.shoe_name 
     - let shoe_color= toShow.shoe_color 
     - let shoe_size = toShow.shoe_size 
-    - let actionid = "/resource/resource/shoe/" + shoeid 
+    - let actionid = "/resource/shoe/" + shoeid 
     script let actionid = "#{actionid}" 
     div 
       div.row 
@@ -41,10 +41,10 @@ block content
       fetch(actionid, { 
         method: 'DELETE'      
       }).then((resp) => { 
-        return resp.json(); // or resp.text() or whatever the server sends 
+        return resp.json();  
       }).then((body) => { 
         alert("Delete succeded") 
-        window.location.href='/resource/resource/shoe' 
+        window.location.href='/resource/shoe'
         // TODO handle body 
       }).catch((error) => { 
         // TODO handle error 
