@@ -1,15 +1,12 @@
-extends layout
-
-block content
-  h1= title
-  p Aakanksha Reddy's #{title}
-  button(type="button",class="btn btn-danger",onclick="moreClaps()") Press Me
-  p 
-  div(id="target") Clap for me
-  script.
-   clap_count=0;
-   function moreClaps() {
-   clap_count=clap_count+2;
-   document.getElementById("target").innerHTML = "Clap " +clap_count+ " times";
-   }
-  a(href="shoe") shoe link
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/shoe") Take me to Shoe
+    br 
+    a(href="/logout") Logout

@@ -76,7 +76,7 @@ failed`);
 // Handle a show all view 
 exports.shoe_view_all_Page = async function(req, res) { 
     try{ 
-        theshoes = await shoe.find(); 
+        theshoe = await shoe.find(); 
         res.render('shoe', { title: 'shoe Search Results', results: theshoe }); 
     } 
     catch(err){ 
