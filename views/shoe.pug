@@ -1,16 +1,16 @@
+extends layout 
 
 block content
   h1= title
   -let results = [{shoe_name:"Nike",shoe_color:"Black",shoe_size:5},{shoe_name:"Addidas",shoe_color:"White",shoe_size:6},{shoe_name:"Puma",shoe_color:"Brown",shoe_size:7}]
-  div(class="container-fluid")
-  div(class="row")
-    -
-    each j,index in results 
-            div(class="col-sm-2" onclick=`buy(${index})`)  #{j.shoe_name}  
-            div(class="col-sm-2" onclick=`buy(${index})`)  #{j.shoe_color}
-            div(class="col-sm-2" onclick=`buy(${index})`)  #{j.shoe_size}
-script.
-    function buy(r)
-    {
-        alert(`You have purchased item ${r+1}`);
-    }
+  div(class="container-fluid") 
+    div(class="row m-1") 
+      each item in results  
+        - let destination = `dispatch(\"/shoe/update?id=${item._id}\")` 
+        div(class="row-sm-2", class="m-1") Item #{item.shoe_name}(#{item.shoe_color}) is #{item.shoe_size} 
+          button.btn( class="btn-primary ml-1", onclick= destination) Update 
+   
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    } 
